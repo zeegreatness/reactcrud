@@ -6,16 +6,7 @@ class Table extends React.Component{
 		super();
 
 		this.state = {
-			tableData: [{
-				resourceID: '',
-				resourceType: '',
-				tenantName: '',
-				dealerID: '',
-				status: '',
-				logFilePath: '',
-				supportPerson: '',
-				lastUpdatedTime: '',
-			}],
+			tableData: [],
 		};
 	}
 
@@ -28,6 +19,10 @@ class Table extends React.Component{
 		});
 	}
 
+	editName = (id) => {
+		console.log(id);
+	}
+	
 	render () {
 		const { tableData } = this.state;
 
@@ -41,8 +36,7 @@ class Table extends React.Component{
 							defaultPageSize={10}
 							filterable={true}
 							data={tableData}
-							columns={[
-								{
+							columns={[{
 									Header: 'Basic Details',
 									columns: [
 										{
@@ -52,10 +46,13 @@ class Table extends React.Component{
 											Header: 'Lastname',
 											id: 'lastname',
 											accessor: d => d.lastname,
+										},{
+											Header: 'Action',
+											accessor: 'id',
+											Cell: ({value}) => (<button className={"btn btn-info"} onClick={()=>{this.editName(value)}}>Edit</button>)
 										},
 									],
-								}
-							]}
+								}]}
 						/>
 						</div>
 					</div>
